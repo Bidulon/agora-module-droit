@@ -1,2 +1,6 @@
 .directory
 
+# Exclusion de Behat
+composer.*
+bin/
+vendor/
