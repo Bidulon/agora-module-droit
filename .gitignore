@@ -4,3 +4,4 @@
 composer.*
 bin/
 vendor/
+features/*
