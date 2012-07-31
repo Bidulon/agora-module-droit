@@ -993,4 +993,14 @@ $trad["MAIL_historique_mail"] = "Historique des e-mails envoyés";
 $trad["MAIL_aucun_mail"] = "Aucun e-mail";
 $trad["MAIL_envoye_par"] = "e-mail envoyé par";
 $trad["MAIL_destinataires"] = "Destinataires";
+
+////	MODULES ADDITIONNELS
+////
+$liste_module	 = db_tableau("SELECT * FROM gt_module WHERE gt_module.nom not in ('tableau_bord','utilisateurs','agenda','fichier','forum','tache','lien','contact','mail','install')" );
+
+foreach($liste_module as $module)
+{
+	include "modules_fr/".$module["module_dossier_fichier"].".php";
+}
+
 ?>

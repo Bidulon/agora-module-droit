@@ -1,0 +1,1 @@
+INSERT INTO `gt_module` (`nom`, `module_dossier_fichier`) VALUES ('droits_modules', 'module_droits_modules');
