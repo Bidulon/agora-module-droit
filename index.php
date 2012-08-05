@@ -6,7 +6,6 @@ define("CONTROLE_SESSION",false);
 require_once "./includes/global.inc.php";
 require_once PATH_INC."header.inc.php";
 
-
 ////	REINITIALISATION DU MOT DE PASSE
 ////
 if(isset($_GET["id_newpassword"]) && isset($_GET["id_utilisateur"]))
