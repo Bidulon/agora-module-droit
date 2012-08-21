@@ -6,9 +6,10 @@ use Behat\Behat\Context\ClosuredContextInterface,
     Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
+
 use Behat\MinkExtension\Context\MinkContext;
-//use Behat\Mink\Session;
-//use Behat\Mink\Driver\DriverInterface;
+
+require_once 'vendor/autoload.php';
 
 //
 // Require 3rd-party libraries here:
@@ -31,8 +32,13 @@ class FeatureContext extends MinkContext
     public function __construct(array $parameters)
     {
         // Initialize your context here
-        $this->useContext('mink', new MinkContext);
-        var_dump($this);
+        // var_dump($parameters);
+        // $this->useContext('mink', new MinkContext);
+        // init session:
+        // $session = new \Behat\Mink\Session(new GoutteDriver());
+
+        // start session:
+        // $session->start();
     }
 
 //

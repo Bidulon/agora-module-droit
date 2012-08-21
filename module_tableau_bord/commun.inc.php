@@ -22,6 +22,6 @@ function suppr_actualite($id_actualite)
 ////
 function droit_ajout_actualite()
 {
-	if($_SESSION["user"]["id_utilisateur"]>0  &&  (option_module("ajout_actualite_admin")!=true || $_SESSION["espace"]["droit_acces"]==2))  return true;
+	if($_SESSION["user"]["id_utilisateur"]>0  && (option_module("ajout_actualite_admin")!=true || $_SESSION["espace"]["droit_acces"]==2 || (function_exists("droit_ecriture_module") && droit_ecriture_module()) ) )  return true;
 }
 ?>

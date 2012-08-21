@@ -346,32 +346,34 @@ if($_SESSION["user"]["id_utilisateur"]>0 && $cfg_menu_edit["objet_independant"]=
 
 				////	UTILISATEURS
 				////
-				foreach(users_espace($espace_tmp["id_espace"],"tableau") as $user_tmp)
-				{
-					// INIT
-					$id_tmp = "E".$espace_tmp["id_espace"]."_U".$user_tmp["id_utilisateur"];
-					$style_tmp = "objet_deselect";
-					$check_1 = $check_15 = $check_2 = "";
-					// DROITS D'ACCES
-					foreach($users_1 as $droit_tmp)		{  if($droit_tmp["id_espace"]==$espace_tmp["id_espace"] && $droit_tmp["id_utilisateur"]==$user_tmp["id_utilisateur"])  { $check_1="checked";  $style_tmp="objet_lecture"; }   }
-					foreach($users_15 as $droit_tmp)	{  if($droit_tmp["id_espace"]==$espace_tmp["id_espace"] && $droit_tmp["id_utilisateur"]==$user_tmp["id_utilisateur"])  { $check_15="checked"; $style_tmp="objet_ecriture_limite"; }   }
-					foreach($users_2 as $droit_tmp)		{  if($droit_tmp["id_espace"]==$espace_tmp["id_espace"] && $droit_tmp["id_utilisateur"]==$user_tmp["id_utilisateur"])  { $check_2="checked";  $style_tmp="objet_ecriture"; }   }
-					// ADMINISTRATEUR ?
-					$desactive_acces_limites = $admin_infobulle = "";
-					if(droit_acces_espace($espace_tmp["id_espace"],$user_tmp)==2){
-						$desactive_acces_limites = $style_disabled;
-						$admin_infobulle = infobulle("<span style='color:#f00'>".$trad["EDIT_OBJET_admin_espace"]."</span>");
+				if (!isset($cfg_menu_edit["hide_users"]) || $cfg_menu_edit["hide_users"] < 1) {
+					foreach(users_espace($espace_tmp["id_espace"],"tableau") as $user_tmp)
+					{
+						// INIT
+						$id_tmp = "E".$espace_tmp["id_espace"]."_U".$user_tmp["id_utilisateur"];
+						$style_tmp = "objet_deselect";
+						$check_1 = $check_15 = $check_2 = "";
+						// DROITS D'ACCES
+						foreach($users_1 as $droit_tmp)		{  if($droit_tmp["id_espace"]==$espace_tmp["id_espace"] && $droit_tmp["id_utilisateur"]==$user_tmp["id_utilisateur"])  { $check_1="checked";  $style_tmp="objet_lecture"; }   }
+						foreach($users_15 as $droit_tmp)	{  if($droit_tmp["id_espace"]==$espace_tmp["id_espace"] && $droit_tmp["id_utilisateur"]==$user_tmp["id_utilisateur"])  { $check_15="checked"; $style_tmp="objet_ecriture_limite"; }   }
+						foreach($users_2 as $droit_tmp)		{  if($droit_tmp["id_espace"]==$espace_tmp["id_espace"] && $droit_tmp["id_utilisateur"]==$user_tmp["id_utilisateur"])  { $check_2="checked";  $style_tmp="objet_ecriture"; }   }
+						// ADMINISTRATEUR ?
+						$desactive_acces_limites = $admin_infobulle = "";
+						if(droit_acces_espace($espace_tmp["id_espace"],$user_tmp)==2){
+							$desactive_acces_limites = $style_disabled;
+							$admin_infobulle = infobulle("<span style='color:#f00'>".$trad["EDIT_OBJET_admin_espace"]."</span>");
+						}
+						// ICONE USER COURANT / ADMINISTRATEUR ?
+						$icone_dependance = ($user_tmp["id_utilisateur"]==$_SESSION["user"]["id_utilisateur"] || $admin_infobulle!="")  ?  "dependance2.png"  :  "dependance.png";
+						// AFFICHAGE
+						echo "<tr class='tr_survol' ".$admin_infobulle.">";
+							echo "<td><img src=\"".PATH_TPL."divers/".$icone_dependance."\" /></td>";
+							echo "<td class='".$style_tmp."' id='text_".$id_tmp."' onClick=\"selection_affect(this.id);\">".$user_tmp["prenom"]." ".$user_tmp["nom"]."</td>";
+							echo "<td class='cellule_input' title=\"".$trad["lecture_infos"]."\"><input type='checkbox' name='lecture_users[]' id='lecture_".$id_tmp."' value='".$id_tmp."' onClick=\"selection_affect(this.id);\"  ".$check_1." ".$desactive_acces_limites." /></td>";
+							if($is_conteneur==true)  echo "<td class='cellule_input2' title=\"".$trad["ecriture_limit_infos"]."\"><input type='checkbox' name='ecriture_limit_users[]' id='ecriture_limit_".$id_tmp."' value='".$id_tmp."' onClick=\"selection_affect(this.id);\" ".$check_15." ".$desactive_acces_limites." /></td>";
+							echo "<td class='cellule_input' title=\"".$trad["ecriture_infos"]."\"><input type='checkbox' name='ecriture_users[]' id='ecriture_".$id_tmp."' value='".$id_tmp."' onClick=\"selection_affect(this.id);\"  ".$check_2." /></td>";
+						echo "</tr>";
 					}
-					// ICONE USER COURANT / ADMINISTRATEUR ?
-					$icone_dependance = ($user_tmp["id_utilisateur"]==$_SESSION["user"]["id_utilisateur"] || $admin_infobulle!="")  ?  "dependance2.png"  :  "dependance.png";
-					// AFFICHAGE
-					echo "<tr class='tr_survol' ".$admin_infobulle.">";
-						echo "<td><img src=\"".PATH_TPL."divers/".$icone_dependance."\" /></td>";
-						echo "<td class='".$style_tmp."' id='text_".$id_tmp."' onClick=\"selection_affect(this.id);\">".$user_tmp["prenom"]." ".$user_tmp["nom"]."</td>";
-						echo "<td class='cellule_input' title=\"".$trad["lecture_infos"]."\"><input type='checkbox' name='lecture_users[]' id='lecture_".$id_tmp."' value='".$id_tmp."' onClick=\"selection_affect(this.id);\"  ".$check_1." ".$desactive_acces_limites." /></td>";
-						if($is_conteneur==true)  echo "<td class='cellule_input2' title=\"".$trad["ecriture_limit_infos"]."\"><input type='checkbox' name='ecriture_limit_users[]' id='ecriture_limit_".$id_tmp."' value='".$id_tmp."' onClick=\"selection_affect(this.id);\" ".$check_15." ".$desactive_acces_limites." /></td>";
-						echo "<td class='cellule_input' title=\"".$trad["ecriture_infos"]."\"><input type='checkbox' name='ecriture_users[]' id='ecriture_".$id_tmp."' value='".$id_tmp."' onClick=\"selection_affect(this.id);\"  ".$check_2." /></td>";
-					echo "</tr>";
 				}
 
 				////	FIN "DIV DES DROITS ACCES"  &  "BLOCK ESPACE"

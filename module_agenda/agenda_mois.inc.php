@@ -81,7 +81,7 @@ for($cpt_jour=($jour_semaine_dernier_jour_mois+1); $cpt_jour<=7; $cpt_jour++){
 
 		////	LIBELLE JOUR  /  AJOUT EVT
 		$lien_ajouter = $icone_ajouter = $libelle_proposer = "";
-		if($agenda_proposer_affecter_evt!="")
+		if($agenda_proposer_affecter_evt!="" && droit_ecriture_module())
 		{
 			$date_evt_edit = strtotime($jour_ymd." ".strftime("%H").":00:00");
 			if($agenda_proposer_affecter_evt=="proposer")	$libelle_proposer = " (".$trad["AGENDA_proposer"].")";

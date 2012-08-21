@@ -10,11 +10,13 @@ controle_acces_admin('admin_espace');
 $liste_modules = modules_espace($_SESSION['espace']['id_espace']);
 $liste_utilisateurs = users_espace($_SESSION['espace']['id_espace'], 'all' );
 $liste_groupes = groupes_users($_SESSION['espace']['id_espace']);
-var_dump($liste_groupes);
+// var_dump($liste_groupes);
 
 // Configuration pour l'affichage des droits d'accès
 $cfg_menu_edit["notif_mail"] = false;
 $cfg_menu_edit["fichiers_joint"] = false;
+$cfg_menu_edit["objet"]["cle_id_objet"] = "id_module";
+$cfg_menu_edit["objet"]["table_objet"] = "gt_module";
 ?>
 
 <style>
@@ -37,7 +39,7 @@ $cfg_menu_edit["fichiers_joint"] = false;
 				<?php foreach ($liste_modules as $module) : ?>
 				<div class="menu_gauche_ligne">
 					<div class="menu_gauche_img"><img src="<?php echo PATH_TPL.$module['module_dossier_fichier']; ?>/plugin.png"/></div>
-					<div class="menu_gauche_txt lien" onclick="edit_iframe_popup('droits_module_edit.php');"><?php echo $trad[strtoupper($module["nom"])."_nom_module"]; ?></div>
+					<div class="menu_gauche_txt lien" onclick="edit_iframe_popup('droits_module_edit.php?id_module=<?php echo $module["id_module"]; ?>');"><?php echo $trad[strtoupper($module["nom"])."_nom_module"]; ?></div>
 				</div>
 				<?php endforeach; ?>
 			</div>
@@ -48,36 +50,45 @@ $cfg_menu_edit["fichiers_joint"] = false;
 	<table>
 		<tr>
 	<?php foreach ($liste_modules as $module) : ?>
-		<?php $indexModule++; ?>
+		<?php
+			$indexModule++;
+			$cfg_menu_edit["objet"]["type_objet"] = "module"; 
+			$cfg_menu_edit["objet"]["id_objet"] = $module["id_module"];
+
+			$droits_module = objet_affectations($cfg_menu_edit["objet"], $module["id_module"], "groupes");
+
+			$lecteurs = array();
+			$contributeurs = array();
+
+			foreach ($droits_module as $droit) {
+				switch ($droit['droit']) {
+					case '1':
+						$lecteurs[] = $droit['titre'];
+						break;
+					
+					case '2':
+						$contributeurs[] = $droit['titre'];
+						break;
+				}
+			}
+
+			sort($lecteurs);
+			sort($contributeurs);
+
+		?>
 			<td>
 				<table class="div_elem_deselect div_elem_contenu div_elem_table" style="<?php echo "width:".$width_element.";height:".$height_element.";"; ?>">
 					<tr>
 						<td>
-							<div style="height:200px;overflow-y:auto;">
+							<div>
 								<div class="titre_espace"><?php echo $trad[strtoupper($module["nom"])."_nom_module"]; ?></div><hr />
 								<div>
-<!--								<div>
-									<table style="width: 100%;">
-										<tr>
-											<th style="text-align: left;">Groupes</th>
-											<th style="width: 20%;"><?php echo ucfirst($trad["lecture"]); ?></th>
-											<th style="width: 20%;"><?php echo ucfirst($trad["ecriture"]); ?></th>
-										</tr>
-									<?php foreach ($liste_groupes as $groupe) : ?>
-										<tr>
-											<td><?php echo $groupe["titre"]; ?></td>
-										</tr>
-									<?php endforeach; ?>
-									</table>
-								</div><hr /> -->
-									<?php include(PATH_INC."element_edit.inc.php"); ?>
-<!--
-								<div>
-									<div>Utilisateurs</div>
-									<?php foreach ($liste_utilisateurs as $utilisateur) : ?>
-										<div><?php echo $utilisateur["nom"]." ".$utilisateur["prenom"]; ?></div>
-									<?php endforeach; ?>
-								</div> -->
+								<div class="titre_espace_bis"><i>Groupes avec accès en lecture :</i></div>
+								<div><?php echo (count($lecteurs) > 0) ? implode(', ', $lecteurs) : $trad['Aucun']; ?></div>
+								</div>
+								<div class="titre_espace_bis"><i>Groupes avec accès en écriture :</i></div>
+								<div><?php echo (count($contributeurs) > 0) ? implode(', ', $contributeurs) : $trad['Aucun']; ?></div>
+								</div>
 							</div>
 						</td>
 					</tr>
