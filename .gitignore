@@ -3,3 +3,4 @@
 # Exclusion des outils supplémentaire
 vendor/
 bin/
+composer*
