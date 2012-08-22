@@ -1,2 +1,5 @@
 .directory
 
+# Exclusion des outils supplémentaire
+vendor/
+bin/
