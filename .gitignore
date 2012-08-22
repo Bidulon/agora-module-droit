@@ -2,6 +2,6 @@
 
 # Exclusion des outils supplémentaire
 bin/
-features/
+features/*
 vendor/
 composer*
