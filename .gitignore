@@ -2,6 +2,7 @@
 
 # Exclusion de Behat
 composer.*
+behat.yml
 bin/
 vendor/
 features/*
