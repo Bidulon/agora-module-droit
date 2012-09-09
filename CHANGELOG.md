@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-Version 0.1
+Version 2.13.2-0.1
 -----------
 
 - Ajout du module 'droits module'
