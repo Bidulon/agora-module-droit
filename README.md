@@ -8,7 +8,7 @@ Agora-Project est un outil de travail collaboratif. Plus d'infos sur le site off
 Installation
 ------------
 
-**ATTENTION ce module modifie certains fichier d'origine de l'agora-project**
+**ATTENTION ce module modifie certains fichiers d'origine de l'agora-project**
 
 Pour installer le module effectuer les opérations suivantes :
 *copier simplement les fichiers dans le répertoire d'installer de votre ragora.
