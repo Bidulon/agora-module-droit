@@ -11,6 +11,6 @@ Installation
 **ATTENTION ce module modifie certains fichiers d'origine de l'agora-project**
 
 Pour installer le module effectuer les opérations suivantes :
-1. copier simplement les fichiers dans le répertoire d'installer de votre agora.
-2. Exécuter les requêtes SQL du fichier /module_droits_modules/db_install.sql
-3. Remplacer les fichiers d'origines listés dans /module_droits_modules/modified_original_files.txt par leurs homologues .dist-mdm
+  1. copier simplement les fichiers dans le répertoire d'installer de votre agora.
+  2. Exécuter les requêtes SQL du fichier /module_droits_modules/db_install.sql
+  3. Remplacer les fichiers d'origines listés dans /module_droits_modules/modified_original_files.txt par leurs homologues .dist-mdm
