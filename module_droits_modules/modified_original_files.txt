@@ -4,3 +4,4 @@ includes/element_edit.inc.php
 module_agenda/agenda_mois.inc.php
 module_agenda/commun.inc.php
 module_tableau_bord/commun.inc.php
+traduction/francais.php
