@@ -17,6 +17,7 @@ $cfg_menu_edit["notif_mail"] = false;
 $cfg_menu_edit["fichiers_joint"] = false;
 $cfg_menu_edit["objet"]["cle_id_objet"] = "id_module";
 $cfg_menu_edit["objet"]["table_objet"] = "gt_module";
+
 ?>
 
 <style>
@@ -27,23 +28,23 @@ $cfg_menu_edit["objet"]["table_objet"] = "gt_module";
 
 <table id="contenu_principal_table"><tr>
 	<td id="menu_gauche_block_td">
-		<div id="menu_gauche_block_flottant">
-			<div id="menu_gauche_block_flottant" class="menu_gauche_block content">
-				<div class="menu_gauche_ligne">
-					<div class="menu_gauche_txt"><?php echo $_SESSION["espace"]["nom"]; ?></div>
-				</div><hr />
-				<div class="menu_gauche_ligne">
-					<div class="menu_gauche_img"></div>
-					<div class="menu_gauche_txt"><?php echo $trad["DROITS_MODULES_liste_modules"]; ?></div>
-				</div>
-				<?php foreach ($liste_modules as $module) : ?>
-				<div class="menu_gauche_ligne">
-					<div class="menu_gauche_img"><img src="<?php echo PATH_TPL.$module['module_dossier_fichier']; ?>/plugin.png"/></div>
-					<div class="menu_gauche_txt lien" onclick="edit_iframe_popup('droits_module_edit.php?id_module=<?php echo $module["id_module"]; ?>');"><?php echo $trad[strtoupper($module["nom"])."_nom_module"]; ?></div>
-				</div>
-				<?php endforeach; ?>
-			</div>
-		</div>
+        <div id="menu_gauche_block_flottant" class="menu_gauche_block content">
+            <div class="menu_gauche_ligne">
+                <div class="menu_gauche_txt"><?php echo $_SESSION["espace"]["nom"]; ?></div>
+            </div><hr />
+            <div class="menu_gauche_ligne">
+                <div class="menu_gauche_img"></div>
+                <div class="menu_gauche_txt"><?php echo $trad["DROITS_MODULES_liste_modules"]; ?>
+                    <br /><em style="font-weight: normal"><?php echo $trad["DROITS_MODULES_liste_modules_precisions"]; ?></em></div>
+            </div>
+            <?php foreach ($liste_modules as $module) : ?>
+                <?php if (!in_array($module['nom'], $supported_mods)) { continue; } ?>
+            <div class="menu_gauche_ligne">
+                <div class="menu_gauche_img"><img src="<?php echo PATH_TPL.$module['module_dossier_fichier']; ?>/plugin.png"/></div>
+                <div class="menu_gauche_txt lien" onclick="edit_iframe_popup('droits_module_edit.php?id_module=<?php echo $module["id_module"]; ?>');"><?php echo $trad[strtoupper($module["nom"])."_nom_module"]; ?></div>
+            </div>
+            <?php endforeach; ?>
+        </div>
 	</td>
 	<td>
 	<?php $indexModule = 0; ?>
@@ -51,6 +52,7 @@ $cfg_menu_edit["objet"]["table_objet"] = "gt_module";
 		<tr>
 	<?php foreach ($liste_modules as $module) : ?>
 		<?php
+            if (!in_array($module['nom'], $supported_mods)) { continue; }
 			$indexModule++;
 			$cfg_menu_edit["objet"]["type_objet"] = "module"; 
 			$cfg_menu_edit["objet"]["id_objet"] = $module["id_module"];

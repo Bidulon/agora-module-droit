@@ -4,4 +4,10 @@
 @define("MODULE_DOSSIER","module_droits_modules");
 require_once "../includes/global.inc.php";
 
+// Tableau indiquant les modules supportés
+$supported_mods = array(
+    "tableau_bord",
+    "agenda"
+)
+
 ?>
