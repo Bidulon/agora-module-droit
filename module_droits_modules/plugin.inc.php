@@ -1,10 +1,18 @@
 <?php
 if (!function_exists("droit_ecriture_module")) {
-	function droit_ecriture_module() {
+    /**
+     * @param null $pSpecificMod Nom du module dont le droit en écriture doit être vérifié, si ce paramètre est omis on vérifie pour le module courant
+     * @return bool
+     */
+    function droit_ecriture_module($pSpecificMod = null) {
 		$groupes_utilisateur = groupes_users($_SESSION["espace"]["id_espace"], $_SESSION['user']['id_utilisateur']);
 
 		// Récupération de l'id_module
-		$module_infos = db_tableau("SELECT * FROM gt_module WHERE nom='".MODULE_NOM."'");
+        if ($pSpecificMod != null) {
+            $module_infos = db_tableau("SELECT * FROM gt_module WHERE nom='".$pSpecificMod."'");
+        } else {
+		    $module_infos = db_tableau("SELECT * FROM gt_module WHERE nom='".MODULE_NOM."'");
+        }
 		if (!is_array($module_infos)) { return false; }
 
 		$module_infos = $module_infos[0];
@@ -22,11 +30,19 @@ if (!function_exists("droit_ecriture_module")) {
 }
 
 if (!function_exists("droit_acces_module")) {
-    function droit_acces_module() {
+    /**
+     * @param null $pSpecificMod Nom du module dont le droit d'accès doit être vérifié, si ce paramètre est omis on vérifie pour le module courant
+     * @return bool
+     */
+    function droit_acces_module($pSpecificMod = null) {
         $groupes_utilisateur = groupes_users($_SESSION["espace"]["id_espace"], $_SESSION['user']['id_utilisateur']);
 
         // Récupération de l'id_module
-        $module_infos = db_tableau("SELECT * FROM gt_module WHERE nom='".MODULE_NOM."'");
+        if ($pSpecificMod != null) {
+            $module_infos = db_tableau("SELECT * FROM gt_module WHERE nom='".$pSpecificMod."'");
+        } else {
+            $module_infos = db_tableau("SELECT * FROM gt_module WHERE nom='".MODULE_NOM."'");
+        }
         if (!is_array($module_infos)) { return false; }
 
         $module_infos = $module_infos[0];
