@@ -7,7 +7,8 @@ require_once "../includes/global.inc.php";
 // Tableau indiquant les modules supportés
 $supported_mods = array(
     "tableau_bord",
-    "agenda"
+    "agenda",
+    "droits_modules",
 )
 
 ?>
