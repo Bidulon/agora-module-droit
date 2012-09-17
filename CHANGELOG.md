@@ -8,6 +8,7 @@ Version 2.13.2-0.3 (en cours de développement)
  - Support de l'affichage des îcones dans le menu haut
  - Correction sur le support du module tableau de bord
  - Blocage de l'accès de lecture sur le module droits_modules
+ - Support de l'accès au module fichiers. Sert uniquement à ouvrir l'accès au modules, la gestion d'accès aux fichiers et aux dossiers se fait toujours via le module fichier
 
 
 
