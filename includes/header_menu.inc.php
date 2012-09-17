@@ -317,7 +317,7 @@ $(window).load(function(){
 		foreach($_SESSION["espace"]["modules"] as $module_tmp)
 		{
 			// Les invités n'affichent pas le module mail
-            if (in_array($module_tmp['nom'], $supported_mods) && !droit_acces_module($module_tmp["nom"]) && !droit_ecriture_module($module_tmp["nom"])) { continue; }
+            if (in_array($module_tmp['nom'], $supported_mods) && !droit_acces_module($module_tmp["nom"]) && !droit_ecriture_module($module_tmp["nom"]) || ($module_tmp['nom'] == 'droits_modules' && droit_acces_module($module_tmp["nom"])) ) { continue; }
 			if($_SESSION["user"]["id_utilisateur"]<1 && $module_tmp["nom"]=="mail")	continue;
 			// Style
 			if(preg_match("/parametrage|espaces|logs/i",MODULE_DOSSIER))	$style_tmp = "icone_module_mask";

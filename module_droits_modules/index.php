@@ -5,7 +5,9 @@ require "commun.inc.php";
 require PATH_INC."header_menu.inc.php";
 elements_width_height_type_affichage("large","180px","bloc");
 
-controle_acces_admin('admin_espace');
+if (!droit_ecriture_module()) {
+    controle_acces_admin('admin_espace');
+}
 
 $liste_modules = modules_espace($_SESSION['espace']['id_espace']);
 $liste_utilisateurs = users_espace($_SESSION['espace']['id_espace'], 'all' );

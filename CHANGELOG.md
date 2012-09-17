@@ -7,6 +7,7 @@ Version 2.13.2-0.3 (en cours de développement)
  - Clarification de l'interface de gestion du module en affichant uniquement les modules supportés
  - Support de l'affichage des îcones dans le menu haut
  - Correction sur le support du module tableau de bord
+ - Blocage de l'accès de lecture sur le module droits_modules
 
 
 
