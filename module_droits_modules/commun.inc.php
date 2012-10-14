@@ -9,6 +9,10 @@ $supported_mods = array(
     "tableau_bord",
     "fichier",
     "agenda",
+    "contact",
+    "lien",
+    "tache",
+    "mail",
     "droits_modules",
 )
 
