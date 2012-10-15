@@ -13,6 +13,8 @@ $supported_mods = array(
     "lien",
     "tache",
     "mail",
+    "utilisateurs",
+    "forum",
     "droits_modules",
 )
 

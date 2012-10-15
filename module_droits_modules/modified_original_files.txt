@@ -4,5 +4,6 @@ includes/element_edit.inc.php
 includes/header_menu.inc.php
 module_agenda/agenda_mois.inc.php
 module_agenda/commun.inc.php
+module_forum/commun.inc.php
 module_tableau_bord/commun.inc.php
 traduction/francais.php
